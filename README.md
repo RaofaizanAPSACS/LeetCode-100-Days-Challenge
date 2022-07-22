@@ -25,9 +25,9 @@
  ## Problems categorized on importance
  
  I categorize my problems based on the difficulty level or importance that will be essential for anyone to go through, when needed. Like,
- "Day--------imp" -> Here imp means important.
- "Day--------Nimp" -> Here Nimp means Not important.
- "Day--------Norm" -> Here Norm means Normal.
+ * "Day--------imp" -> Here imp means important.
+ * "Day--------Nimp" -> Here Nimp means Not important.
+ * "Day--------Norm" -> Here Norm means Normal.
  
  ## Solutions
  I write solutions of the different problems of the leetcode on the daily basis, which are purely in C++ Programming language.
