@@ -14,33 +14,39 @@ Return true if you can finish all courses. Otherwise, return false.
 using namespace std;
 
 
-void dfs(map<int, vector<int>> &list, int i, bool &isCycle, vector<bool> visited){
-    if(visited[i]){
-        isCycle = true;
-        return;
+bool dfs(map<int, vector<int>> &list, int i, vector<bool> &visited2, vector<bool> &visited){
+    if(visited[i] == false){
+        visited[i] = true;
+        visited2[i] = true;
+        for(auto x: list[i]){
+
+            if(!visited[x] and dfs(list, x, visited2, visited) )
+                return true;
+            else if(visited2[x])
+                return true;
+        }
     }
-    visited[i] = true;
-    for(auto x: list[i]){
-        dfs(list, x, isCycle, visited);
-    }
+    visited2[i] = false;
+    return false;
 }   
 bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
     map<int, vector<int> > adjlist;
     vector<bool> visited(numCourses, false);
-    bool isCycle = false;
+    vector<bool> visited2(numCourses, false);
 
     for(auto x: prerequisites){
         adjlist[x[0]].push_back(x[1]);
     }
     for(auto x: adjlist){
-        dfs(adjlist, x.first, isCycle, visited);
+        if(!visited[x.first]  and dfs(adjlist, x.first, visited2, visited))
+            return false;
     }
-    return !isCycle;
+    return true;
 }
 
 int main(){
     vector<vector<int> > pre{
-        {1,0},{0,1}
+        {1,0},{0,2}
     };
     cout<<canFinish(2, pre); 
     return 0;
