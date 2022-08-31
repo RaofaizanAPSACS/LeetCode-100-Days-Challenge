@@ -10,6 +10,7 @@ The replacement must be in place and use only constant extra memory.
 #include<bits/stdc++.h>
 using namespace std;
 
+// SOLUTION 1 : BRUTE FORCE APPROACH
 void permutations(string nums,string ans, vector<string> &allper){
     if(nums.size() == 0){
         allper.push_back(ans);
@@ -56,9 +57,29 @@ void nextPermutation(vector<int> &nums){
         cout<<x<<endl;
 }
 
+
+// SOLUTION 2: GREEDY APPROACH
+void nextPermutation2(vector<int> &nums){
+    int i;
+    for(i=nums.size()-1;i>=1;i--){
+        if(nums[i] > nums[i-1])
+            break;
+    }
+    if(i == 0)
+        reverse(nums.begin(),nums.end());
+    else{
+        for(int j=nums.size()-1; j>=i; j--){
+            if(nums[j] > nums[i-1])
+                swap(nums[j],nums[i-1]);
+                break;
+        }
+        reverse(nums.begin()+i, nums.end());
+    }
+}
+
 int main(){   
-    vector<int> nums{1,5,1};
-    nextPermutation(nums);
+    vector<int> nums{1,2,3};
+    nextPermutation2(nums);
     for(auto x: nums)
         cout<<x<<" ";
 	return 0;
